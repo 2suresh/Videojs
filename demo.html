@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Video.js | HTML5 Video Player</title>
+    <script src="jquery.min.js"></script>
+    <link href="video-js.css" rel="stylesheet">
+    <script src="video.js"></script>
+    <script src="creatistVideo.js"></script>
+    <script src='videojs.markers.js'></script>
+    <link href="videojs.markers.css" rel="stylesheet">
+
+    <!-- Unless using the CDN hosted version, update the URL to the Flash SWF -->
+    <script>
+        videojs.options.flash.swf = "video-js.swf";
+    </script>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <!--
+        <video id="video" class="video-js vjs-default-skin" controls preload="none" width="640" height="264" poster="http://video-js.zencoder.com/oceans-clip.png" data-setup="{}">
+            <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
+            <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
+            <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+        </video>
+
+        -->
+        <video id="video" class="video-js vjs-default-skin" preload="none" width="640" height="264" controls poster="oceans-clip.png" data-setup="{}"></video>
+        <div>
+            <button id="playVideo">Play</button>
+            <button id="pauseVideo">Pause</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+      var videoPlayed = function (e) {
+          console.log("Video Played", e);
+      }
+
+      var videoPaused = function (e) {
+          console.log("Video Paused", e);
+      }
+
+      var videoSeeking = function (e) {
+          console.log("Seeking", e);
+      }
+
+      var tag = function (t) {
+          console.log("tag hit @ " + t);
+      }
+
+
+      var op = {   
+        elementId : 'video',
+        videoUrl: "oceans-clip.webm",
+        poster: "oceans-clip.png",
+        cbPlay: videoPlayed,
+        cbPause: videoPaused,
+        cbSeeking: videoSeeking,
+        tags: [9, 16, 23, 28, 36], // pushing the tag & marking the progress bar
+        activityText : ["this", "is", "so", "cool", ":)"],
+        cbTag: tag
+      };
+
+     
+      var v = new CreatistVideo(op);
+
+      if (!v.init()) {
+        console.log(v.getLastError());
+      }
+
+    </script>
+
+    <script type="text/javascript">
+      var video = videojs('video');
+      $("#pauseVideo").click(function () {
+            video.pause();
+        });
+
+        $("#playVideo").click(function () {
+            video.play();
+            //window.setTimeout(function() {video.play();}, 10); 
+        });
+    </script>
+</body>
+
+</html>
